@@ -22,22 +22,31 @@ module.exports = () => {
         template: './index.html',
         title: 'Text-Editor'
       }),
+      new InjectManifest({
+        swSrc: './src-sw.js',
+        swDest: 'src-sw.js'
+      }),
       new WebpackPwaManifest({
         fingerprints: false,
         inject: true,
         name: 'Text-Editor',
         short_name: 'JATE',
         description: 'Just a Text-Editor',
-        background_color: ''
+        background_color: '',
+        theme_color: '',
+        start_url: './',
+        publicPath: './',
+        icons: [
+          {
+            src: path.resolve('src/images/logo.png'),
+            size: [96, 128, 192, 256, 384, 512],
+            destination: path.join('assets', 'icons')
+          },
+        ],
       }),
-      new InjectManifest({
-        swSrc: './src-sw.js',
-        swDest: 'src-sw.js'
-      })
     ],
 
     module: {
-      // Copied from the mini project
       rules: [
         {
           test: /\.css$/i,
